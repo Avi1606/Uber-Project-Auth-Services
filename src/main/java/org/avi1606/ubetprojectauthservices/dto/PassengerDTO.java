@@ -1,19 +1,32 @@
 package org.avi1606.ubetprojectauthservices.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.avi1606.ubetprojectauthservices.models.Passenger;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PassengerDTO {
 
-    private String name;
+    String id;
 
-    private String email;
+    String name;
 
-    private String password;
+    String email;
+
+    String password;
+
+    String phonenumber;
+
+    public static PassengerDTO toDTO(Passenger passenger) {
+        return PassengerDTO.builder()
+                .id(String.valueOf(passenger.getId()))
+                .name(passenger.getName())
+                .email(passenger.getEmail())
+                .phonenumber(passenger.getPhonenumber())
+                .build();
+    }
+
 }

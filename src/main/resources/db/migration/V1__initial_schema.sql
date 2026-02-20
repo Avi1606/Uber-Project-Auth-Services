@@ -1,39 +1,19 @@
-ALTER TABLE booking
-DROP
-CONSTRAINT fkei2mjigb4hb2sm4htt6jhwn6;
+-- Add email column
+ALTER TABLE passenger ADD COLUMN IF NOT EXISTS email VARCHAR(255);
 
-ALTER TABLE passanger_review
-DROP
-CONSTRAINT fkfsk2381wrtp4shcye38fjlsvu;
+-- Add password column
+ALTER TABLE passenger ADD COLUMN IF NOT EXISTS password VARCHAR(255);
 
-ALTER TABLE passenger
-    ADD email VARCHAR(255);
+-- Add phonenumber column
+ALTER TABLE passenger ADD COLUMN IF NOT EXISTS phonenumber VARCHAR(255);
 
-ALTER TABLE passenger
-    ADD password VARCHAR(255);
+-- Update existing rows with default values
+UPDATE passenger SET email = '' WHERE email IS NULL;
+UPDATE passenger SET password = '' WHERE password IS NULL;
+UPDATE passenger SET phonenumber = '' WHERE phonenumber IS NULL;
 
-ALTER TABLE passenger
-    ADD phonenumber VARCHAR(255);
-
-ALTER TABLE passenger
-    ALTER COLUMN email SET NOT NULL;
-
-ALTER TABLE passenger
-    ALTER COLUMN password SET NOT NULL;
-
-ALTER TABLE passenger
-    ALTER COLUMN phonenumber SET NOT NULL;
-
-DROP TABLE bookingreview CASCADE;
-
-DROP TABLE hibernate_sequences CASCADE;
-
-DROP TABLE passanger_review CASCADE;
-
-ALTER TABLE booking
-DROP
-COLUMN review_id;
-
-ALTER TABLE passenger
-    ALTER COLUMN name SET NOT NULL;
-
+-- Add NOT NULL constraints
+ALTER TABLE passenger ALTER COLUMN email SET NOT NULL;
+ALTER TABLE passenger ALTER COLUMN password SET NOT NULL;
+ALTER TABLE passenger ALTER COLUMN phonenumber SET NOT NULL;
+ALTER TABLE passenger ALTER COLUMN name SET NOT NULL;
