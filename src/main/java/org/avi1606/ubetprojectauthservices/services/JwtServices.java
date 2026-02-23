@@ -25,7 +25,7 @@ public class JwtServices implements CommandLineRunner {
     @Value("${jwt.secreat}")
     private String secret;
 
-    private String createToken(Map<String, Object> payload, String username) {
+    public String createToken(Map<String, Object> payload, String username) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + expiry * 1000L);
 
@@ -50,6 +50,10 @@ public class JwtServices implements CommandLineRunner {
                 .getPayload();
     }
 
+    public String createTokenWithEmail(String email) {
+        Map<String, Object> mp = new HashMap<>();
+        return createToken(mp, email);
+    }
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         Claims claims = extractAllPayload(token);
         return claimsResolver.apply(claims);
@@ -83,7 +87,6 @@ public class JwtServices implements CommandLineRunner {
         mp.put("email", "abc@gmail.com");
         mp.put("phonenumber", "8780090909);");
         String result = createToken(mp, "Avi");
-        System.out.println("Generated token is" +result);
     }
 
 }

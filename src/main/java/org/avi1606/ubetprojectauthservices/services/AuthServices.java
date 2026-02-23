@@ -6,6 +6,7 @@ import org.avi1606.ubetprojectauthservices.dto.PassengerSignupDTO;
 import org.avi1606.ubetprojectauthservices.models.Passenger;
 import org.avi1606.ubetprojectauthservices.repositories.PassengerRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -15,7 +16,7 @@ public class AuthServices {
 
     private final PassengerRepository passengerRepository;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
     public PassengerDTO signupPassenger(@RequestBody PassengerSignupDTO passengerSignupDTO) {
         Passenger passenger = Passenger.builder()

@@ -25,6 +25,7 @@ public class PassengerDTO {
                 .id(String.valueOf(passenger.getId()))
                 .name(passenger.getName())
                 .email(passenger.getEmail())
+                .password(passenger.getPassword())
                 .phonenumber(passenger.getPhonenumber())
                 .build();
     }
