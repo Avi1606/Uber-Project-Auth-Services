@@ -72,7 +72,7 @@ public class JwtServices implements CommandLineRunner {
     }
 
     public String extractEmail(String token) {
-        return extractClaim(token, claims -> claims.get("email", String.class));
+        return extractClaim(token, Claims::getSubject);
     }
 
     public boolean validToken(String token, String email) {

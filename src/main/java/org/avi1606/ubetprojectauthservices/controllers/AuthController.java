@@ -45,6 +45,7 @@ public class AuthController {
     @PostMapping("signin/passenger")
     public ResponseEntity<?> signin(@RequestBody AuthRequestDTO authRequestDTO, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword()));
+
         if (authentication.isAuthenticated()) {
             String jwtToken = jwtServices.createTokenWithEmail(Objects.requireNonNull(authentication.getPrincipal()).toString());
             ResponseCookie responseCookie = ResponseCookie.fromClientResponse("jwtToken", jwtToken)
