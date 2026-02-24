@@ -1,5 +1,6 @@
 package org.avi1606.ubetprojectauthservices.controllers;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,7 @@ public class AuthController {
                     .httpOnly(true)
                     .secure(false)
                     .maxAge(cookieExpiry)
+                    .path("/")
                     .build();
             response.setHeader(HttpHeaders.SET_COOKIE,responseCookie.toString());
             return new ResponseEntity<>(jwtToken, HttpStatus.OK);
@@ -57,4 +59,14 @@ public class AuthController {
             return new ResponseEntity<>("Failed Auth", HttpStatus.OK);
         }
     }
+
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateJwtToken(HttpServletRequest request) {
+        for (Cookie cookie : request.getCookies()) {
+            System.out.println(cookie.getName()+" "+ cookie.getValue());
+        }
+        return new ResponseEntity<>("success", HttpStatus.OK);
+
+    }
+
 }
