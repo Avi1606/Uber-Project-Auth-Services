@@ -41,16 +41,23 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        String email = jwtServices.extractEmail(token);
+        try {
+            String email = jwtServices.extractEmail(token);
 
-        if(email != null){
-            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-            if (jwtServices.validToken(token, userDetails.getUsername())) {
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null);//create authentication object
-                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); //add session id , ip address etc
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            if(email != null){
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                if (jwtServices.validToken(token, userDetails.getUsername())) {
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                }
             }
+        } catch (Exception e) {
+            // If JWT authentication fails, continue without setting authentication
+            // This allows public endpoints to still work even with invalid/expired tokens
+            System.out.println("JWT authentication failed: " + e.getMessage());
         }
+
         filterChain.doFilter(request,response);
     }
 }

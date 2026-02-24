@@ -16,6 +16,7 @@ import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -47,7 +48,10 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword()));
 
         if (authentication.isAuthenticated()) {
-            String jwtToken = jwtServices.createTokenWithEmail(Objects.requireNonNull(authentication.getPrincipal()).toString());
+            // Cast principal to UserDetails and get email
+            String email = ((UserDetails) authentication.getPrincipal()).getUsername();
+            String jwtToken = jwtServices.createTokenWithEmail(email);
+
             ResponseCookie responseCookie = ResponseCookie.fromClientResponse("jwtToken", jwtToken)
                     .httpOnly(true)
                     .secure(false)
@@ -57,7 +61,7 @@ public class AuthController {
             response.setHeader(HttpHeaders.SET_COOKIE,responseCookie.toString());
             return new ResponseEntity<>(jwtToken, HttpStatus.OK);
         }else {
-            return new ResponseEntity<>("Failed Auth", HttpStatus.OK);
+            return new ResponseEntity<>("Failed Auth", HttpStatus.UNAUTHORIZED);
         }
     }
 
