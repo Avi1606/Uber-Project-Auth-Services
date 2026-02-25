@@ -1,7 +1,7 @@
 package org.avi1606.ubetprojectauthservices.dto;
 
 import lombok.*;
-import org.avi1606.ubetprojectauthservices.models.Passenger;
+import org.avi1606.uberprojectentity.models.Passenger;
 
 @Getter
 @Setter

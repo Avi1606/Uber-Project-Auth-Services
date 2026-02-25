@@ -1,11 +1,10 @@
 package org.avi1606.ubetprojectauthservices.services;
 
 import lombok.AllArgsConstructor;
+import org.avi1606.uberprojectentity.models.Passenger;
 import org.avi1606.ubetprojectauthservices.dto.PassengerDTO;
 import org.avi1606.ubetprojectauthservices.dto.PassengerSignupDTO;
-import org.avi1606.ubetprojectauthservices.models.Passenger;
 import org.avi1606.ubetprojectauthservices.repositories.PassengerRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;

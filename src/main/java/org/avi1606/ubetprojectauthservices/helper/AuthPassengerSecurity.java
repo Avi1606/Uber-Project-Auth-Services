@@ -1,6 +1,6 @@
 package org.avi1606.ubetprojectauthservices.helper;
 
-import org.avi1606.ubetprojectauthservices.models.Passenger;
+import org.avi1606.uberprojectentity.models.Passenger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

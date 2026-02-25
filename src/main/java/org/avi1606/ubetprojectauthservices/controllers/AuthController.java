@@ -3,12 +3,10 @@ package org.avi1606.ubetprojectauthservices.controllers;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.avi1606.ubetprojectauthservices.dto.AuthRequestDTO;
 import org.avi1606.ubetprojectauthservices.dto.PassengerDTO;
 import org.avi1606.ubetprojectauthservices.dto.PassengerSignupDTO;
-import org.avi1606.ubetprojectauthservices.models.Passenger;
 import org.avi1606.ubetprojectauthservices.services.AuthServices;
 import org.avi1606.ubetprojectauthservices.services.JwtServices;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,10 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("api/v1/auth")

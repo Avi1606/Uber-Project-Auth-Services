@@ -1,8 +1,8 @@
 package org.avi1606.ubetprojectauthservices.services;
 
 import lombok.AllArgsConstructor;
+import org.avi1606.uberprojectentity.models.Passenger;
 import org.avi1606.ubetprojectauthservices.helper.AuthPassengerSecurity;
-import org.avi1606.ubetprojectauthservices.models.Passenger;
 import org.avi1606.ubetprojectauthservices.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
